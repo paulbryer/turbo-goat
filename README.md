@@ -1,36 +1,23 @@
 
-Getting and Cleaning Data Course Project
+### Overview
+The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. A full description of the data used in this project can be found at [The UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
-How the run_analysis.R script works:
+[The source data for this project can be found here.](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
+### Possible Modifications Necessary for This Script
 The script assumes that we have already downloaded and unzipped the .zip file, into the folder "C:/Users/asus/Documents/R/Getting and Cleaning Data/UCI HAR Dataset"
 
-If this is not where you have unzipped it too, you will only need change this filepath once: All other file paths are relative to the initial working directory set in line 5 of run_analysis.R
+If this is not where you have unzipped it to, you need only need change the working directory filepath in line 5 of run_analysis.R : All other file paths are relative to this.
 
-We start by reading the relevant files into R:
+### Project Summary
+The following is a summary description of the project instructions
 
-features.txt contains the descriptions of what the data columns are measurements of.
-After reading it in, we transpose it and remove the first row.
-This results in a character vector (features) which we will later use to name the columns of our data frame, and to decide which columns to extract from the full data set.
+You should create one R script called run_analysis.R that does the following. 
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive activity names. 
+5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-Subject IDs are in the subject_test and subject_train files. They tell us which human subject the measurements were taken from. The two sets are then combined into one object (all_subjects) using the cbind command.
-
-The activity data is given in the y_train and y_test files. These contain numbers 1 to 6, which corresponds to the activity being performed (as outlined in the activity_labels file). The two sets of data are column-binded, and the numbers replaced by meaningful labels. 
-
-The main sets of measurement data are contained in the x_train and _test files. These sets are row-binded, and the feature names used to name the columns.
-
-The assignment calls for just the columns relating to mean and standard deviation. This is achieved by use of the general expression function, grep(). 
-It is used twice, once for mean and once or standard deviation, and the results clipped together to give a full list of columns to be extracted (desired_cols).
-
-These columns are then subsetted into a new object, desired_data
-
-The Subject ID and Activity are then col-binded to the front of desired_data.
-
-At this point I realised there were columns relating to meanFreq which had snuck through the general expression function. This required another general expression column selection, this time on the string "meanFreq", and a further subsetting of the data set to exclude these columns. 
-
-At this point, desired_data is now our cleaned up data set.
-
-The next step is to create a tidy data set from desired_data and write it to a file.
-To do that the function ddply() from the plyr package was used to create a summary table for each Subject_ID & Activity.
-
-Et voila! C'est fin.
+### Additional Information
+You can find additional information about the variables, data and transformations in the CodeBook.MD file.
